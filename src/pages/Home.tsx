@@ -362,6 +362,7 @@ Qualquer duvida é só chamar 😊`
         const data_form = {
           "Telefone agendado": scheduled.phoneNumber,
           "Nome Completo": scheduled.name,
+          "Idade":scheduled.age,
           "Dia e Horario Agendado": scheduled.timeScheduled,
           "Modalidade": ModalityFormat(scheduled.modality),
           "Local": LocalFormat(scheduled.local),
