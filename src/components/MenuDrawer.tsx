@@ -1,45 +1,38 @@
-import React, { useState } from 'react';
-import { Drawer, IconButton, List, ListItem, ListItemText, Box, Typography } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
+import { Drawer, List, ListItemText, Box, Typography, ListItemIcon, Stack, ListItemButton, Divider } from '@mui/material';
+import {AdminPanelSettingsOutlined as AdminIcon, HomeOutlined as Home} from "@mui/icons-material"
 
 
-
-export default function MenuSlider() {
-    const [open, setOpen] = useState(false);
-
-    const toggleDrawer = (state: boolean) => () => {
-        setOpen(state);
-    };
+export default function MenuSlider({open, setOpen} : {open : boolean, setOpen: (open : boolean) => void}) {
 
     return (
         <>
             {/* Botão de abrir o menu */}
-            <IconButton onClick={toggleDrawer(true)}>
-                <MenuIcon sx={{ color: 'white' }} />
-            </IconButton>
 
             {/* Drawer (menu lateral) */}
-            <Drawer anchor="left" open={open} onClose={toggleDrawer(false)}>
-                <Box sx={{ width: 400, paddingTop: 2, height: "100%", padding: "5px"}} role="presentation" onClick={toggleDrawer(false)}>
-                    <Typography variant='h4' >Sistema Esplay</Typography>
-                    <List className=''>
-                        <ListItem component="button">
-                            <ListItemText primary="Início" />
-                        </ListItem>
-                        <ListItem component="button">
-                            <ListItemText primary="Criar Aula" />
-                        </ListItem>
-                        <ListItem component="button">
-                            <ListItemText primary="Agendamentos" />
-                        </ListItem>
-                        <ListItem component="button">
-                            <ListItemText primary="Sair" />
-                        </ListItem>
+            <Drawer anchor="left" open={open} onClose={() => setOpen(false)}>
+                <Box  sx={{  backgroundColor: "#1c1c1c", color: "#fff",  maxWidth: 600, paddingTop: 2, height: "100%", padding: "20px"}} role="presentation" onClick={() => setOpen(false)}>
+                    <Stack spacing={"10px"}>
+                    <Typography variant='h6' textAlign={"center"} >Sistema Esplay</Typography>
+                    <List >
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <Home />
+                            </ListItemIcon>
+                            <ListItemText>Aulas Experimentais</ListItemText>
+                        </ListItemButton>
+                        <ListItemButton >
+                            <ListItemIcon>
+                                <AdminIcon />
+                            </ListItemIcon>
+                            <ListItemText>Admin</ListItemText>
+                        </ListItemButton>
                     </List>
+                    </Stack>
+                    <Divider />
                 </Box>
 
 
-                <Typography variant="subtitle1" textAlign={"center"} sx={{padding: "10px"}} color="textSecondary">Desenvolvidor por Icaro Gagarin</Typography>
+            
             </Drawer>
         </>
     );

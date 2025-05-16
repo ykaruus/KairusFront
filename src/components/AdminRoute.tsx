@@ -9,7 +9,7 @@ interface PrivateRouteProps {
     children: React.ReactNode;
 }
 
-const PrivateRoute = ({ children }: PrivateRouteProps) => {
+const AdminRoute = ({ children }: PrivateRouteProps) => {
 
     const [logado, setLogado] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -21,16 +21,12 @@ const PrivateRoute = ({ children }: PrivateRouteProps) => {
         const checkAuth = async () => {
             try {
                 const response = await verify_token();
-                
+                console.log(response.validy)
 
 
-
-
-                if(response.validy)
+                if(response.validy && response.token_config.role == "admin")
                 {
                     setLogado(true);
-
-                    localStorage.setItem("auth_token_details", JSON.stringify(response))
 
                 } else {
                     setLogado(false);
@@ -54,4 +50,4 @@ const PrivateRoute = ({ children }: PrivateRouteProps) => {
     return logado ? children : <Navigate to="/login" replace />;
 };
 
-export default PrivateRoute;
+export default AdminRoute;
